@@ -1,0 +1,27 @@
+{
+  "finalTestJhipsterAngularApp": {
+    "task": {
+      "home": {
+        "title": "Tasks",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Task を追加",
+        "createOrEditLabel": "Taskを追加または編集",
+        "notFound": "No Tasks found"
+      },
+      "created": "A new Task is created with identifier {{ param }}",
+      "updated": "A Task is updated with identifier {{ param }}",
+      "deleted": "A Task is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Task {{ id }}を削除してもよろしいですか？"
+      },
+      "detail": {
+        "title": "Task"
+      },
+      "id": "ID",
+      "title": "Title",
+      "isChecked": "Is Checked",
+      "dateAdd": "Date Add",
+      "deadLine": "Dead Line"
+    }
+  }
+}
