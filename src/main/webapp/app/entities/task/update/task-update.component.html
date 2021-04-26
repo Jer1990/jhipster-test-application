@@ -1,0 +1,116 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-task-heading" data-cy="TaskCreateUpdateHeading" jhiTranslate="finalTestJhipsterAngularApp.task.home.createOrEditLabel">
+        Create or edit a Task
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="finalTestJhipsterAngularApp.task.title" for="field_title">Title</label>
+          <input type="text" class="form-control" name="title" id="field_title" data-cy="title" formControlName="title" />
+          <div *ngIf="editForm.get('title')!.invalid && (editForm.get('title')!.dirty || editForm.get('title')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('title')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="finalTestJhipsterAngularApp.task.isChecked" for="field_isChecked"
+            >Is Checked</label
+          >
+          <input type="checkbox" class="form-check" name="isChecked" id="field_isChecked" data-cy="isChecked" formControlName="isChecked" />
+          <div *ngIf="editForm.get('isChecked')!.invalid && (editForm.get('isChecked')!.dirty || editForm.get('isChecked')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('isChecked')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="finalTestJhipsterAngularApp.task.dateAdd" for="field_dateAdd">Date Add</label>
+          <div class="input-group">
+            <input
+              id="field_dateAdd"
+              data-cy="dateAdd"
+              type="text"
+              class="form-control"
+              name="dateAdd"
+              ngbDatepicker
+              #dateAddDp="ngbDatepicker"
+              formControlName="dateAdd"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dateAddDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+            </span>
+          </div>
+          <div *ngIf="editForm.get('dateAdd')!.invalid && (editForm.get('dateAdd')!.dirty || editForm.get('dateAdd')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('dateAdd')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="finalTestJhipsterAngularApp.task.deadLine" for="field_deadLine">Dead Line</label>
+          <div class="input-group">
+            <input
+              id="field_deadLine"
+              data-cy="deadLine"
+              type="text"
+              class="form-control"
+              name="deadLine"
+              ngbDatepicker
+              #deadLineDp="ngbDatepicker"
+              formControlName="deadLine"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="deadLineDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+            </span>
+          </div>
+          <div *ngIf="editForm.get('deadLine')!.invalid && (editForm.get('deadLine')!.dirty || editForm.get('deadLine')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('deadLine')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

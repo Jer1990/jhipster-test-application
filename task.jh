@@ -1,0 +1,10 @@
+
+
+
+entity Task{
+    title String required,
+    isChecked Boolean required,
+    dateAdd LocalDate required,
+    deadLine LocalDate required
+}
+

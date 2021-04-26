@@ -42,7 +42,9 @@
     "jwtSecretKey": "MTIzNWVmMDFhODgyZmZiMGVlMzFlNTM4NjI0OWUwOTdlMTkzY2JiM2U3ZDgzZWNiYTdkYTA2OWQxZjA5NDMxMTkxY2I3MGI5NDhlY2U3NjM3NTBkZWQ2N2U1OWEyNGNlY2MwOGY1OWNkNDc4NTQ3M2NhNjg3ZjU2NWFjZjc4N2E=",
     "clientTheme": "none",
     "clientThemeVariant": "",
-    "reactive": false
+    "reactive": false,
+    "entities": ["Task"],
+    "lastLiquibaseTimestamp": 1619427180000
   },
   "git-provider": "GitHub",
   "git-company": "Jer1990",

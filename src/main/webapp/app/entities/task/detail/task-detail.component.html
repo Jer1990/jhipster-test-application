@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="task">
+      <h2 data-cy="taskDetailsHeading"><span jhiTranslate="finalTestJhipsterAngularApp.task.detail.title">Task</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ task.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="finalTestJhipsterAngularApp.task.title">Title</span></dt>
+        <dd>
+          <span>{{ task.title }}</span>
+        </dd>
+        <dt><span jhiTranslate="finalTestJhipsterAngularApp.task.isChecked">Is Checked</span></dt>
+        <dd>
+          <span>{{ task.isChecked }}</span>
+        </dd>
+        <dt><span jhiTranslate="finalTestJhipsterAngularApp.task.dateAdd">Date Add</span></dt>
+        <dd>
+          <span>{{ task.dateAdd | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="finalTestJhipsterAngularApp.task.deadLine">Dead Line</span></dt>
+        <dd>
+          <span>{{ task.deadLine | formatMediumDate }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/task', task.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
