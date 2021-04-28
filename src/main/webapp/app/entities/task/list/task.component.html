@@ -37,6 +37,7 @@
           <th scope="col"><span jhiTranslate="finalTestJhipsterAngularApp.task.isChecked">Is Checked</span></th>
           <th scope="col"><span jhiTranslate="finalTestJhipsterAngularApp.task.dateAdd">Date Add</span></th>
           <th scope="col"><span jhiTranslate="finalTestJhipsterAngularApp.task.deadLine">Dead Line</span></th>
+          <th scope="col"><span jhiTranslate="finalTestJhipsterAngularApp.task.nombreTask">Nombre Task</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -49,6 +50,7 @@
           <td>{{ task.isChecked }}</td>
           <td>{{ task.dateAdd | formatMediumDate }}</td>
           <td>{{ task.deadLine | formatMediumDate }}</td>
+          <td>{{ task.nombreTask }}</td>
           <td class="text-right">
             <div class="btn-group">
               <button type="submit" [routerLink]="['/task', task.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">

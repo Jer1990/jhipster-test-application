@@ -20,6 +20,11 @@
       "fieldName": "deadLine",
       "fieldType": "LocalDate",
       "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "nombreTask",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
     }
   ],
   "relationships": [],

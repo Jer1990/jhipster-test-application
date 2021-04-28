@@ -21,6 +21,7 @@ export class TaskUpdateComponent implements OnInit {
     isChecked: [null, [Validators.required]],
     dateAdd: [null, [Validators.required]],
     deadLine: [null, [Validators.required]],
+    nombreTask: [null, [Validators.required]],
   });
 
   constructor(protected taskService: TaskService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
@@ -71,6 +72,7 @@ export class TaskUpdateComponent implements OnInit {
       isChecked: task.isChecked,
       dateAdd: task.dateAdd,
       deadLine: task.deadLine,
+      nombreTask: task.nombreTask,
     });
   }
 
@@ -82,6 +84,7 @@ export class TaskUpdateComponent implements OnInit {
       isChecked: this.editForm.get(['isChecked'])!.value,
       dateAdd: this.editForm.get(['dateAdd'])!.value,
       deadLine: this.editForm.get(['deadLine'])!.value,
+      nombreTask: this.editForm.get(['nombreTask'])!.value,
     };
   }
 }

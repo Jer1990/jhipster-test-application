@@ -6,6 +6,7 @@ export interface ITask {
   isChecked?: boolean;
   dateAdd?: dayjs.Dayjs;
   deadLine?: dayjs.Dayjs;
+  nombreTask?: number;
 }
 
 export class Task implements ITask {
@@ -14,7 +15,8 @@ export class Task implements ITask {
     public title?: string,
     public isChecked?: boolean,
     public dateAdd?: dayjs.Dayjs,
-    public deadLine?: dayjs.Dayjs
+    public deadLine?: dayjs.Dayjs,
+    public nombreTask?: number
   ) {
     this.isChecked = this.isChecked ?? false;
   }

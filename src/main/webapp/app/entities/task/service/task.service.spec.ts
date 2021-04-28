@@ -30,6 +30,7 @@ describe('Service Tests', () => {
         isChecked: false,
         dateAdd: currentDate,
         deadLine: currentDate,
+        nombreTask: 0,
       };
     });
 
@@ -83,6 +84,7 @@ describe('Service Tests', () => {
             isChecked: true,
             dateAdd: currentDate.format(DATE_FORMAT),
             deadLine: currentDate.format(DATE_FORMAT),
+            nombreTask: 1,
           },
           elemDefault
         );
@@ -108,6 +110,7 @@ describe('Service Tests', () => {
             title: 'BBBBBB',
             isChecked: true,
             deadLine: currentDate.format(DATE_FORMAT),
+            nombreTask: 1,
           },
           new Task()
         );
@@ -137,6 +140,7 @@ describe('Service Tests', () => {
             isChecked: true,
             dateAdd: currentDate.format(DATE_FORMAT),
             deadLine: currentDate.format(DATE_FORMAT),
+            nombreTask: 1,
           },
           elemDefault
         );
@@ -194,7 +198,7 @@ describe('Service Tests', () => {
         });
 
         it('should add only unique Task to an array', () => {
-          const taskArray: ITask[] = [{ id: 123 }, { id: 456 }, { id: 50503 }];
+          const taskArray: ITask[] = [{ id: 123 }, { id: 456 }, { id: 8495 }];
           const taskCollection: ITask[] = [{ id: 123 }];
           expectedResult = service.addTaskToCollectionIfMissing(taskCollection, ...taskArray);
           expect(expectedResult).toHaveLength(3);

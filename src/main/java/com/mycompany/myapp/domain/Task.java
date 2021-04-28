@@ -37,6 +37,10 @@ public class Task implements Serializable {
     @Column(name = "dead_line", nullable = false)
     private LocalDate deadLine;
 
+    @NotNull
+    @Column(name = "nombre_task", nullable = false)
+    private Integer nombreTask;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
@@ -103,6 +107,19 @@ public class Task implements Serializable {
         this.deadLine = deadLine;
     }
 
+    public Integer getNombreTask() {
+        return this.nombreTask;
+    }
+
+    public Task nombreTask(Integer nombreTask) {
+        this.nombreTask = nombreTask;
+        return this;
+    }
+
+    public void setNombreTask(Integer nombreTask) {
+        this.nombreTask = nombreTask;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -131,6 +148,7 @@ public class Task implements Serializable {
             ", isChecked='" + getIsChecked() + "'" +
             ", dateAdd='" + getDateAdd() + "'" +
             ", deadLine='" + getDeadLine() + "'" +
+            ", nombreTask=" + getNombreTask() +
             "}";
     }
 }
