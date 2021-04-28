@@ -30,6 +30,10 @@
         <dd>
           <span>{{ task.deadLine | formatMediumDate }}</span>
         </dd>
+        <dt><span jhiTranslate="finalTestJhipsterAngularApp.task.nombreTask">Nombre Task</span></dt>
+        <dd>
+          <span>{{ task.nombreTask }}</span>
+        </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
