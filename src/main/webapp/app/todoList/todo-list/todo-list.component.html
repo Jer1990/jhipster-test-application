@@ -1,0 +1,85 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <ul class="navbar-nav ml-auto">
+    <li>
+      <span>|</span>
+    </li>
+    <span>Trier :</span>
+    <li class="nav-item">
+      <a class="nav-link">
+        <span>
+          <fa-icon icon="arrow-up"></fa-icon>
+          <span (click)="orderAlphaAsc()">Alph. Asc.</span>
+        </span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link">
+        <span>
+          <fa-icon icon="arrow-down"></fa-icon>
+          <span (click)="orderAlphaDesc()">Alph. Desc.</span>
+        </span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link">
+        <span>
+          <fa-icon icon="calendar-alt"></fa-icon>
+          <span (click)="orderDateAsc()">Date Asc.</span>
+        </span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link">
+        <span>
+          <fa-icon icon="calendar-alt"></fa-icon>
+          <span (click)="orderDateDesc()">Date Desc.</span>
+        </span>
+      </a>
+    </li>
+    <li>
+      <span>|</span>
+    </li>
+    <span>Filtrer :</span>
+    <li class="nav-item">
+      <a class="nav-link">
+        <span>
+          <fa-icon icon="thumbs-up"></fa-icon>
+          <span (click)="filterDo()">Fait</span>
+        </span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link">
+        <span>
+          <fa-icon icon="thumbs-down"></fa-icon>
+          <span (click)="filterNotDo()">Non-Fait</span>
+        </span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link">
+        <span>
+          <fa-icon icon="list"></fa-icon>
+          <span (click)="filterAll()">All</span>
+        </span>
+      </a>
+    </li>
+  </ul>
+</nav>
+<jhi-form-todo-list (newTask)="getAll()"></jhi-form-todo-list>
+<div class="list">
+  <ul>
+    <li *ngFor="let task of toDoListFilter | paginate: { itemsPerPage: 5, currentPage: p }">
+      <span class="title">
+        <span>{{ task.title }}</span>
+        <span>DeadLine :</span>
+        <span>{{ task.deadLine.toString() | date: 'longDate' }}</span>
+      </span>
+      <button class="isChecked" (click)="switchMode(task)">
+        <span *ngIf="task.isChecked" style="color: green">Fait!</span>
+        <span *ngIf="!task.isChecked" style="color: red">Non-Fait!</span>
+      </button>
+    </li>
+  </ul>
+  <pagination-controls class="paginator" (pageChange)="p = $event"></pagination-controls>
+</div>

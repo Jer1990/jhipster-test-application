@@ -1,0 +1,7 @@
+<form [formGroup]="todoForm" (ngSubmit)="onSaveTodo()">
+  <input type="text" formControlName="title" placeholder="nouvelle tache" />
+
+  <label>DeadLine :</label>
+  <input type="date" value="new Date()" [min]="minDate" formControlName="deadLine" />
+  <button type="submit" [disabled]="todoForm.invalid">Ajouter</button>
+</form>

@@ -1,0 +1,20 @@
+:host {
+  text-align: center;
+}
+
+.list {
+  display: grid;
+  grid-template-areas: 'title isChecked' 'paginator paginator';
+}
+
+.isChecked {
+  grid-area: isChecked;
+}
+
+.title {
+  grid-area: title;
+}
+
+.paginator {
+  grid-area: paginator;
+}
