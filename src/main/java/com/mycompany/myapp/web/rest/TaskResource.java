@@ -136,6 +136,9 @@ public class TaskResource {
                     if (task.getDeadLine() != null) {
                         existingTask.setDeadLine(task.getDeadLine());
                     }
+                    if (task.getNombreTask() != null) {
+                        existingTask.setNombreTask(task.getNombreTask());
+                    }
 
                     return existingTask;
                 }

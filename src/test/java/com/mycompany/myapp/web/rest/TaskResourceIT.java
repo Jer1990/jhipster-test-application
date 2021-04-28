@@ -43,6 +43,9 @@ class TaskResourceIT {
     private static final LocalDate DEFAULT_DEAD_LINE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DEAD_LINE = LocalDate.now(ZoneId.systemDefault());
 
+    private static final Integer DEFAULT_NOMBRE_TASK = 1;
+    private static final Integer UPDATED_NOMBRE_TASK = 2;
+
     private static final String ENTITY_API_URL = "/api/tasks";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -67,7 +70,12 @@ class TaskResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Task createEntity(EntityManager em) {
-        Task task = new Task().title(DEFAULT_TITLE).isChecked(DEFAULT_IS_CHECKED).dateAdd(DEFAULT_DATE_ADD).deadLine(DEFAULT_DEAD_LINE);
+        Task task = new Task()
+            .title(DEFAULT_TITLE)
+            .isChecked(DEFAULT_IS_CHECKED)
+            .dateAdd(DEFAULT_DATE_ADD)
+            .deadLine(DEFAULT_DEAD_LINE)
+            .nombreTask(DEFAULT_NOMBRE_TASK);
         return task;
     }
 
@@ -78,7 +86,12 @@ class TaskResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Task createUpdatedEntity(EntityManager em) {
-        Task task = new Task().title(UPDATED_TITLE).isChecked(UPDATED_IS_CHECKED).dateAdd(UPDATED_DATE_ADD).deadLine(UPDATED_DEAD_LINE);
+        Task task = new Task()
+            .title(UPDATED_TITLE)
+            .isChecked(UPDATED_IS_CHECKED)
+            .dateAdd(UPDATED_DATE_ADD)
+            .deadLine(UPDATED_DEAD_LINE)
+            .nombreTask(UPDATED_NOMBRE_TASK);
         return task;
     }
 
@@ -104,6 +117,7 @@ class TaskResourceIT {
         assertThat(testTask.getIsChecked()).isEqualTo(DEFAULT_IS_CHECKED);
         assertThat(testTask.getDateAdd()).isEqualTo(DEFAULT_DATE_ADD);
         assertThat(testTask.getDeadLine()).isEqualTo(DEFAULT_DEAD_LINE);
+        assertThat(testTask.getNombreTask()).isEqualTo(DEFAULT_NOMBRE_TASK);
     }
 
     @Test
@@ -194,6 +208,23 @@ class TaskResourceIT {
 
     @Test
     @Transactional
+    void checkNombreTaskIsRequired() throws Exception {
+        int databaseSizeBeforeTest = taskRepository.findAll().size();
+        // set the field null
+        task.setNombreTask(null);
+
+        // Create the Task, which fails.
+
+        restTaskMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(task)))
+            .andExpect(status().isBadRequest());
+
+        List<Task> taskList = taskRepository.findAll();
+        assertThat(taskList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     void getAllTasks() throws Exception {
         // Initialize the database
         taskRepository.saveAndFlush(task);
@@ -207,7 +238,8 @@ class TaskResourceIT {
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
             .andExpect(jsonPath("$.[*].isChecked").value(hasItem(DEFAULT_IS_CHECKED.booleanValue())))
             .andExpect(jsonPath("$.[*].dateAdd").value(hasItem(DEFAULT_DATE_ADD.toString())))
-            .andExpect(jsonPath("$.[*].deadLine").value(hasItem(DEFAULT_DEAD_LINE.toString())));
+            .andExpect(jsonPath("$.[*].deadLine").value(hasItem(DEFAULT_DEAD_LINE.toString())))
+            .andExpect(jsonPath("$.[*].nombreTask").value(hasItem(DEFAULT_NOMBRE_TASK)));
     }
 
     @Test
@@ -225,7 +257,8 @@ class TaskResourceIT {
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE))
             .andExpect(jsonPath("$.isChecked").value(DEFAULT_IS_CHECKED.booleanValue()))
             .andExpect(jsonPath("$.dateAdd").value(DEFAULT_DATE_ADD.toString()))
-            .andExpect(jsonPath("$.deadLine").value(DEFAULT_DEAD_LINE.toString()));
+            .andExpect(jsonPath("$.deadLine").value(DEFAULT_DEAD_LINE.toString()))
+            .andExpect(jsonPath("$.nombreTask").value(DEFAULT_NOMBRE_TASK));
     }
 
     @Test
@@ -247,7 +280,12 @@ class TaskResourceIT {
         Task updatedTask = taskRepository.findById(task.getId()).get();
         // Disconnect from session so that the updates on updatedTask are not directly saved in db
         em.detach(updatedTask);
-        updatedTask.title(UPDATED_TITLE).isChecked(UPDATED_IS_CHECKED).dateAdd(UPDATED_DATE_ADD).deadLine(UPDATED_DEAD_LINE);
+        updatedTask
+            .title(UPDATED_TITLE)
+            .isChecked(UPDATED_IS_CHECKED)
+            .dateAdd(UPDATED_DATE_ADD)
+            .deadLine(UPDATED_DEAD_LINE)
+            .nombreTask(UPDATED_NOMBRE_TASK);
 
         restTaskMockMvc
             .perform(
@@ -265,6 +303,7 @@ class TaskResourceIT {
         assertThat(testTask.getIsChecked()).isEqualTo(UPDATED_IS_CHECKED);
         assertThat(testTask.getDateAdd()).isEqualTo(UPDATED_DATE_ADD);
         assertThat(testTask.getDeadLine()).isEqualTo(UPDATED_DEAD_LINE);
+        assertThat(testTask.getNombreTask()).isEqualTo(UPDATED_NOMBRE_TASK);
     }
 
     @Test
@@ -335,7 +374,7 @@ class TaskResourceIT {
         Task partialUpdatedTask = new Task();
         partialUpdatedTask.setId(task.getId());
 
-        partialUpdatedTask.title(UPDATED_TITLE).isChecked(UPDATED_IS_CHECKED).deadLine(UPDATED_DEAD_LINE);
+        partialUpdatedTask.title(UPDATED_TITLE).isChecked(UPDATED_IS_CHECKED).deadLine(UPDATED_DEAD_LINE).nombreTask(UPDATED_NOMBRE_TASK);
 
         restTaskMockMvc
             .perform(
@@ -353,6 +392,7 @@ class TaskResourceIT {
         assertThat(testTask.getIsChecked()).isEqualTo(UPDATED_IS_CHECKED);
         assertThat(testTask.getDateAdd()).isEqualTo(DEFAULT_DATE_ADD);
         assertThat(testTask.getDeadLine()).isEqualTo(UPDATED_DEAD_LINE);
+        assertThat(testTask.getNombreTask()).isEqualTo(UPDATED_NOMBRE_TASK);
     }
 
     @Test
@@ -367,7 +407,12 @@ class TaskResourceIT {
         Task partialUpdatedTask = new Task();
         partialUpdatedTask.setId(task.getId());
 
-        partialUpdatedTask.title(UPDATED_TITLE).isChecked(UPDATED_IS_CHECKED).dateAdd(UPDATED_DATE_ADD).deadLine(UPDATED_DEAD_LINE);
+        partialUpdatedTask
+            .title(UPDATED_TITLE)
+            .isChecked(UPDATED_IS_CHECKED)
+            .dateAdd(UPDATED_DATE_ADD)
+            .deadLine(UPDATED_DEAD_LINE)
+            .nombreTask(UPDATED_NOMBRE_TASK);
 
         restTaskMockMvc
             .perform(
@@ -385,6 +430,7 @@ class TaskResourceIT {
         assertThat(testTask.getIsChecked()).isEqualTo(UPDATED_IS_CHECKED);
         assertThat(testTask.getDateAdd()).isEqualTo(UPDATED_DATE_ADD);
         assertThat(testTask.getDeadLine()).isEqualTo(UPDATED_DEAD_LINE);
+        assertThat(testTask.getNombreTask()).isEqualTo(UPDATED_NOMBRE_TASK);
     }
 
     @Test

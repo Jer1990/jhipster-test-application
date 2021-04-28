@@ -21,7 +21,8 @@
       "title": "Title",
       "isChecked": "Is Checked",
       "dateAdd": "Date Add",
-      "deadLine": "Dead Line"
+      "deadLine": "Dead Line",
+      "nombreTask": "Nombre Task"
     }
   }
 }
